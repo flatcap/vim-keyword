@@ -1,0 +1,31 @@
+*keyword.txt*  Temporary keyword highlighting
+
+Author:  Richard Russon (flatcap) <rich@flatcap.org>
+License: Same terms as Vim itself (see |license|)
+
+This plugin is only available if 'compatible' is not set.
+
+INTRODUCTION                                            *keyword*
+
+With this plugin you can temporarily highlight any words you like.
+
+MAPPING                                                 *keyword-mappings*
+
+  map <F3> <plug>Keyword_Toggle
+
+CONFIGURATION                                           *keyword-configuration*
+
+Two global variables control the syntax highlight group and the colour.
+
+  let g:keyword_group = 'keyword_group'
+  let g:keyword_highlight = 'ctermbg=blue'
+
+Simply set them before the call to pathogen.
+
+ABOUT                                                   *keyword-about*
+
+Grab the latest version or report a bug on GitHub:
+
+http://github.com/flatcap/vim-keyword
+
+ vim:tw=78:ts=2:sw=2:et:ft=help:norl:
