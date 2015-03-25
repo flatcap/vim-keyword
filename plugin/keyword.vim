@@ -67,6 +67,14 @@ function! s:Keyword_Toggle(name)
 	endif
 endfunction
 
+
+function! Keyword_Export()
+	let klist = join(s:key_list, ',')
+	echo 'Keywords: ' . klist
+	return klist
+endfunction
+
+
 call s:Keyword_Clear()
 
 nnoremap <silent> <script> <plug>Keyword_Toggle	:call <SID>Keyword_Toggle("<C-R><C-W>")<CR>
