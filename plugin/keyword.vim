@@ -10,8 +10,8 @@ if exists("g:loaded_keyword_highlighter") || &cp || v:version < 700
 endif
 let g:loaded_keyword_highlighter = 1
 
-let s:key_list   = []
-let s:key_init   = 0
+let s:key_list = []
+let s:key_init = 0
 
 if !exists("g:keyword_group")
 	let g:keyword_group = 'keyword_group'

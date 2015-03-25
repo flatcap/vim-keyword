@@ -22,6 +22,13 @@ Two global variables control the syntax highlight group and the colour.
 
 Simply set them before the call to pathogen.
 
+EXPORT                                                  *keyword-export*
+
+To get the list of the key call Keyword_Toggle()
+e.g. Put the list in a register:
+
+  let @k = Keyword_Toggle()
+
 ABOUT                                                   *keyword-about*
 
 Grab the latest version or report a bug on GitHub:
