@@ -58,6 +58,10 @@ function! s:Keyword_Remove(name)
 endfunction
 
 function! s:Keyword_Toggle(name)
+	if (a:name == '')
+		return
+	endif
+
 	let i = index(s:key_list, a:name)
 	if (i < 0)
 		call s:Keyword_Add(a:name)
@@ -77,5 +81,5 @@ endfunction
 
 call s:Keyword_Clear()
 
-nnoremap <silent> <script> <plug>Keyword_Toggle	:call <SID>Keyword_Toggle("<C-R><C-W>")<CR>
+nnoremap <silent> <script> <plug>Keyword_Toggle	:call <SID>Keyword_Toggle(expand('<cword>'))<CR>
 
