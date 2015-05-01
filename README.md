@@ -1,12 +1,12 @@
-# vim-keyword.vim
+# keyword.vim
 
-vim-keyword: Temporary keyword highlighting
+Temporary keyword highlighting
 
 With this plugin you can temporarily highlight any words you like.
 
 ## Mapping
 
-    map <F3> <plug>Keyword_Toggle
+    map <F3> <plug>KeywordToggle
 
 # Configuration
 
@@ -15,20 +15,17 @@ Two global variables control the syntax highlight group and the colour.
     let g:keyword_group = 'keyword_group'
     let g:keyword_highlight = 'ctermbg=blue'
 
-Simply set them before the call to pathogen.
-
 # Export
 
-To get the list of the key call Keyword_Toggle()
+To get the list of the key call KeywordExport()
 e.g. Put the list in a register:
 
-    let @k = Keyword_Toggle()
+    let @k = KeywordExport()
 
 ## License
 
-Copyright (c) Richard Russon (flatcap).
-Distributed under the same terms as Vim itself.
-See `:help license`.
+Copyright &copy; Richard Russon (flatcap).
+Distributed under the GPLv3 <http://fsf.org/>
 
 ## See also
 

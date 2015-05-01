@@ -11,7 +11,7 @@ With this plugin you can temporarily highlight any words you like.
 
 MAPPING                                                 *keyword-mappings*
 
-  map <F3> <plug>Keyword_Toggle
+  map <F3> <plug>KeywordToggle
 
 CONFIGURATION                                           *keyword-configuration*
 
@@ -20,14 +20,12 @@ Two global variables control the syntax highlight group and the colour.
   let g:keyword_group = 'keyword_group'
   let g:keyword_highlight = 'ctermbg=blue'
 
-Simply set them before the call to pathogen.
-
 EXPORT                                                  *keyword-export*
 
-To get the list of the key call Keyword_Toggle()
+To get the list of the key call KeywordExport()
 e.g. Put the list in a register:
 
-  let @k = Keyword_Toggle()
+  let @k = KeywordExport()
 
 ABOUT                                                   *keyword-about*
 
