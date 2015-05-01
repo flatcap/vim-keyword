@@ -5,82 +5,77 @@
 " License:      GPLv3 <http://fsf.org/>
 " Version:      1.0
 
-if exists("g:loaded_keyword_highlighter") || &cp || v:version < 700
+if (exists ('g:loaded_keyword') || &cp || (v:version < 700))
 	finish
 endif
-let g:loaded_keyword_highlighter = 1
+let g:loaded_keyword = 1
+
+" Set default values
+if (!exists ('g:keywordgroup'))     | let g:keywordgroup     = 'keywordgroup' | endif
+if (!exists ('g:keywordhighlight')) | let g:keywordhighlight = 'ctermbg=blue' | endif
 
 let s:key_list = []
 let s:key_init = 0
 
-if !exists("g:keyword_group")
-	let g:keyword_group = 'keyword_group'
-endif
-
-if !exists("g:keyword_highlight")
-	let g:keyword_highlight = 'ctermbg=blue'
-endif
-
-function! s:Keyword_Clear()
+function! s:KeywordClear()
 	if (s:key_init == 1)
-		execute 'syntax clear ' g:keyword_group
+		execute 'syntax clear ' g:keywordgroup
 	endif
 endfunction
 
-function! s:Keyword_Highlight()
-	call s:Keyword_Clear()
-	for item in s:key_list
-		execute 'syntax keyword ' g:keyword_group item ' containedin=ALL'
+function! s:KeywordHighlight()
+	call s:KeywordClear()
+	for l:item in s:key_list
+		execute 'syntax keyword ' g:keywordgroup l:item ' containedin=ALL'
 	endfor
 	if (!empty (s:key_list))
 		let s:key_init = 1
 	endif
-	execute 'highlight ' g:keyword_group g:keyword_highlight
+	execute 'highlight ' g:keywordgroup g:keywordhighlight
 endfunction
 
-function! s:Keyword_Add(name)
-	let i = index(s:key_list, a:name)
-	if (i < 0)
+function! s:KeywordAdd (name)
+	let l:i = index (s:key_list, a:name)
+	if (l:i < 0)
 		call add (s:key_list, a:name)
 	endif
-	call s:Keyword_Highlight()
+	call s:KeywordHighlight()
 endfunction
 
-function! s:Keyword_Remove(name)
-	let i = index(s:key_list, a:name)
-	if (i >= 0)
-		unlet s:key_list[i]
+function! s:KeywordRemove (name)
+	let l:i = index (s:key_list, a:name)
+	if (l:i >= 0)
+		unlet s:key_list[l:i]
 		if (@/ == a:name)
-			let @/ = ""
+			let @/ = ''
 		endif
 	endif
-	call s:Keyword_Highlight()
+	call s:KeywordHighlight()
 endfunction
 
-function! s:Keyword_Toggle(name)
+function! s:KeywordToggle (name)
 	if (a:name == '')
 		return
 	endif
 
-	let i = index(s:key_list, a:name)
-	if (i < 0)
-		call s:Keyword_Add(a:name)
+	let l:i = index (s:key_list, a:name)
+	if (l:i < 0)
+		call s:KeywordAdd (a:name)
 		let @/=a:name
 	else
-		call s:Keyword_Remove(a:name)
+		call s:KeywordRemove (a:name)
 	endif
 endfunction
 
-
-function! Keyword_Export()
-	let klist = join(s:key_list, ',')
-	echo 'Keywords: ' . klist
-	return klist
+function! g:KeywordExport()
+	let l:klist = join (s:key_list, ',')
+	echo 'Keywords: ' . l:klist
+	return l:klist
 endfunction
 
 
-call s:Keyword_Clear()
+call s:KeywordClear()
 
-nnoremap <silent> <script> <plug>Keyword_Toggle	:call <SID>Keyword_Toggle(expand('<cword>'))<CR>
+nnoremap <silent> <script> <Plug>KeywordToggle :call <SID>KeywordToggle (expand ('<cword>'))<CR>
 
 " vim:set noet ts=8 sw=8:
