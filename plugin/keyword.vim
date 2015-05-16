@@ -67,7 +67,7 @@ function! s:KeywordToggle (name)
 	endif
 endfunction
 
-function! g:KeywordExport()
+function! KeywordExport()
 	let l:klist = join (s:key_list, ',')
 	echo 'Keywords: ' . l:klist
 	return l:klist
