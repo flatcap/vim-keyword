@@ -11,8 +11,8 @@ endif
 let g:loaded_keyword = 1
 
 " Set default values
-if (!exists ('g:keywordgroup'))     | let g:keywordgroup     = 'keywordgroup' | endif
-if (!exists ('g:keywordhighlight')) | let g:keywordhighlight = 'ctermbg=blue' | endif
+let g:keywordgroup     = get (g:, 'keywordgroup',     'keywordgroup')
+let g:keywordhighlight = get (g:, 'keywordhighlight', 'ctermbg=blue')
 
 let s:key_list = []
 let s:key_init = 0
