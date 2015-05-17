@@ -78,4 +78,3 @@ call s:KeywordClear()
 
 nnoremap <silent> <script> <Plug>KeywordToggle :call <SID>KeywordToggle (expand ('<cword>'))<CR>
 
-" vim:set noet ts=8 sw=8:
