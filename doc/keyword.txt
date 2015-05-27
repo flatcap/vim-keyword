@@ -3,31 +3,53 @@
 Author:  Richard Russon (flatcap) <rich@flatcap.org>
 License: GPLv3 <http://fsf.org/>
 
-This plugin is only available if 'compatible' is not set.
+This plugin is only available if |'compatible'| is not set.
 
-INTRODUCTION                                            *keyword*
+INTRODUCTION                                                         *keyword*
 
 With this plugin you can temporarily highlight any words you like.
+The words are defined by the |'iskeyword'| variable.
 
-MAPPING                                                 *keyword-mappings*
+The highlights are buffer-local, i.e. different for each file.
 
+After highlighting, the search pattern is set to the work, so you can skip
+between matches with |n| or |N|.
+
+MAPPING                                                     *keyword-mappings*
+
+To enable the plugin, simply create a mapping in your |.vimrc|
+e.g.
+>
   map <F3> <plug>KeywordToggle
-
-CONFIGURATION                                           *keyword-configuration*
+<
+CONFIGURATION                                          *keyword-configuration*
 
 Two global variables control the syntax highlight group and the colour.
-
-  let g:keyword_group = 'keyword_group'
+>
+  let g:keyword_group     = 'keyword_group'
   let g:keyword_highlight = 'ctermbg=blue'
+<
+LIST                                                            *keyword-list*
 
-EXPORT                                                  *keyword-export*
+The list of keywords is kept in the variable "b:keyword_list".
+You can display the list by typing either:
+>
+  :call keyword#KeywordList()
 
-To get the list of the key call KeywordExport()
-e.g. Put the list in a register:
+  echo b:keyword_list
+<
+FUNCTIONS                                                  *keyword-functions*
 
-  let @k = KeywordExport()
-
-ABOUT                                                   *keyword-about*
+The plugin exports five autoload functions (their names are self-explanatory).
+You can call them directly from a script.
+>
+  call keyword#KeywordClear()
+  call keyword#KeywordAdd ('my_keyword')
+  call keyword#KeywordRemove ('my_keyword')
+  call keyword#KeywordToggle ('my_keyword')
+  call keyword#KeywordList()
+<
+ABOUT                                                          *keyword-about*
 
 Grab the latest version or report a bug on GitHub:
 
