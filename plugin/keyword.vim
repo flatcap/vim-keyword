@@ -5,76 +5,82 @@
 " License:      GPLv3 <http://fsf.org/>
 " Version:      1.0
 
-if (exists ('g:loaded_keyword') || &cp || (v:version < 700))
-	finish
-endif
-let g:loaded_keyword = 1
+" if (exists ('g:loaded_keyword') || &cp || (v:version < 700))
+" 	finish
+" endif
+" let g:loaded_keyword = 1
 
 " Set default values
-let g:keywordgroup     = get (g:, 'keywordgroup',     'keywordgroup')
-let g:keywordhighlight = get (g:, 'keywordhighlight', 'ctermbg=blue')
+let g:keyword_group     = get (g:, 'keyword_group',     'keyword_group')
+let g:keyword_highlight = get (g:, 'keyword_highlight', 'ctermbg=blue')
 
-let s:key_list = []
-let s:key_init = 0
-
-function! s:KeywordClear()
-	if (s:key_init == 1)
-		execute 'syntax clear ' g:keywordgroup
-	endif
+function! s:clear_syntax()
+	silent! execute 'syntax clear ' g:keyword_group
 endfunction
 
-function! s:KeywordHighlight()
-	call s:KeywordClear()
-	for l:item in s:key_list
-		execute 'syntax keyword ' g:keywordgroup l:item ' containedin=ALL'
+function! s:highlight()
+	call s:clear_syntax()
+	for l:item in b:keyword_list
+		execute 'syntax keyword ' g:keyword_group l:item ' containedin=ALL'
 	endfor
-	if (!empty (s:key_list))
-		let s:key_init = 1
-	endif
-	execute 'highlight ' g:keywordgroup g:keywordhighlight
+	execute 'highlight ' g:keyword_group g:keyword_highlight
 endfunction
 
-function! s:KeywordAdd (name)
-	let l:i = index (s:key_list, a:name)
-	if (l:i < 0)
-		call add (s:key_list, a:name)
+function! s:prep()
+	if (!exists ('b:keyword_list'))
+		let b:keyword_list = []
 	endif
-	call s:KeywordHighlight()
 endfunction
 
-function! s:KeywordRemove (name)
-	let l:i = index (s:key_list, a:name)
-	if (l:i >= 0)
-		unlet s:key_list[l:i]
+
+function! KeywordClear()
+	call s:clear_syntax()
+	let b:keyword_list = []
+endfunction
+
+function! KeywordAdd (name)
+	call s:prep()
+	let l:index = index (b:keyword_list, a:name)
+	if (l:index < 0)
+		call add (b:keyword_list, a:name)
+	endif
+	call s:highlight()
+endfunction
+
+function! KeywordRemove (name)
+	call s:prep()
+	let l:index = index (b:keyword_list, a:name)
+	if (l:index >= 0)
+		unlet b:keyword_list[l:index]
 		if (@/ == a:name)
 			let @/ = ''
 		endif
 	endif
-	call s:KeywordHighlight()
+	call s:highlight()
 endfunction
 
-function! s:KeywordToggle (name)
-	if (a:name == '')
+function! KeywordToggle (name)
+	" Only accepts keywords (see 'iskeyword')
+	if (a:name !~ '^\v\k+$')
+		echoerr '"' . a:name . '" is not a valid keyword'
 		return
 	endif
 
-	let l:i = index (s:key_list, a:name)
-	if (l:i < 0)
-		call s:KeywordAdd (a:name)
+	call s:prep()
+	let l:index = index (b:keyword_list, a:name)
+	if (l:index < 0)
+		call KeywordAdd (a:name)
 		let @/=a:name
 	else
-		call s:KeywordRemove (a:name)
+		call KeywordRemove (a:name)
 	endif
 endfunction
 
-function! KeywordExport()
-	let l:klist = join (s:key_list, ',')
-	echo 'Keywords: ' . l:klist
-	return l:klist
+function! KeywordList()
+	call s:prep()
+	echo 'Keywords:' sort(b:keyword_list)
 endfunction
 
 
-call s:KeywordClear()
-
-nnoremap <silent> <script> <Plug>KeywordToggle :call <SID>KeywordToggle (expand ('<cword>'))<CR>
+nnoremap <silent> <script> <Plug>KeywordToggle :call KeywordToggle (expand ('<cword>'))<CR>
 

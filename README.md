@@ -21,7 +21,7 @@ let g:keyword_highlight = 'ctermbg=blue'
 
 ## Export
 
-To get the list of the key call KeywordExport()
+To get a list of the keys, call KeywordExport()
 e.g. Put the list in a register:
 
 ```viml

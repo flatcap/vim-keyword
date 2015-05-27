@@ -22,7 +22,7 @@ Two global variables control the syntax highlight group and the colour.
 <
 EXPORT                                                        *keyword-export*
 
-To get the list of the key call KeywordExport()
+To get a list of the keys, call KeywordExport()
 e.g. Put the list in a register:
 >
   let @k = KeywordExport()
