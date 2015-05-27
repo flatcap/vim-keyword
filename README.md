@@ -6,21 +6,27 @@ With this plugin you can temporarily highlight any words you like.
 
 ## Mapping
 
-    map <F3> <plug>KeywordToggle
+```viml
+map <F3> <plug>KeywordToggle
+```
 
-# Configuration
+## Configuration
 
 Two global variables control the syntax highlight group and the colour.
 
-    let g:keyword_group = 'keyword_group'
-    let g:keyword_highlight = 'ctermbg=blue'
+```viml
+let g:keyword_group = 'keyword_group'
+let g:keyword_highlight = 'ctermbg=blue'
+```
 
-# Export
+## Export
 
 To get the list of the key call KeywordExport()
 e.g. Put the list in a register:
 
-    let @k = KeywordExport()
+```viml
+let @k = KeywordExport()
+```
 
 ## License
 
