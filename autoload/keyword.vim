@@ -37,6 +37,7 @@ function! keyword#KeywordAdd (name)
 	if (l:index < 0)
 		call add (b:keyword_list, a:name)
 	endif
+	let @/=a:name
 	call s:highlight()
 endfunction
 
@@ -63,7 +64,6 @@ function! keyword#KeywordToggle (name)
 	let l:index = index (b:keyword_list, a:name)
 	if (l:index < 0)
 		call keyword#KeywordAdd (a:name)
-		let @/=a:name
 	else
 		call keyword#KeywordRemove (a:name)
 	endif
