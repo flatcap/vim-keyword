@@ -16,7 +16,7 @@ function! s:highlight()
 	for l:item in b:keyword_list
 		execute 'syntax keyword ' g:keyword_group l:item ' contained containedin=ALL'
 	endfor
-	execute 'highlight ' g:keyword_group g:keyword_highlight
+	execute 'highlight default ' g:keyword_group g:keyword_highlight
 endfunction
 
 function! s:is_valid(name)
