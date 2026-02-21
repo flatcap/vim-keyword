@@ -4,7 +4,7 @@
 " Copyright:    2014-2015 Richard Russon
 
 " Set default values
-let g:keyword_group     = get (g:, 'keyword_group',     'keyword_group')
+let g:keyword_group     = get (g:, 'keyword_group',     'KeywordHighlight')
 let g:keyword_highlight = get (g:, 'keyword_highlight', 'ctermbg=blue')
 
 function! s:clear_syntax()
