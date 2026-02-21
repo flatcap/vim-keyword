@@ -19,6 +19,10 @@ function! s:highlight()
 	execute 'highlight ' g:keyword_group g:keyword_highlight
 endfunction
 
+function! s:is_valid(name)
+	return type(a:name) == v:t_string && a:name =~# '^\k\+$'
+endfunction
+
 function! s:prep()
 	if (!exists ('b:keyword_list'))
 		let b:keyword_list = []
@@ -32,6 +36,10 @@ function! keyword#KeywordClear()
 endfunction
 
 function! keyword#KeywordAdd (name)
+	if (!s:is_valid(a:name))
+		echoerr '"' . a:name . '" is not a valid keyword'
+		return
+	endif
 	call s:prep()
 	let l:index = index (b:keyword_list, a:name)
 	if (l:index < 0)
@@ -42,6 +50,10 @@ function! keyword#KeywordAdd (name)
 endfunction
 
 function! keyword#KeywordRemove (name)
+	if (!s:is_valid(a:name))
+		echoerr '"' . a:name . '" is not a valid keyword'
+		return
+	endif
 	call s:prep()
 	let l:index = index (b:keyword_list, a:name)
 	if (l:index >= 0)
@@ -54,8 +66,7 @@ function! keyword#KeywordRemove (name)
 endfunction
 
 function! keyword#KeywordToggle (name)
-	" Only accepts keywords (see 'iskeyword')
-	if (a:name !~ '^\v\k+$')
+	if (!s:is_valid(a:name))
 		echoerr '"' . a:name . '" is not a valid keyword'
 		return
 	endif
