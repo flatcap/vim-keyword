@@ -37,7 +37,7 @@ function! keyword#KeywordAdd (name)
 	if (l:index < 0)
 		call add (b:keyword_list, a:name)
 	endif
-	let @/=a:name
+	let @/ = '\V\<' . escape(a:name, '\') . '\>'
 	call s:highlight()
 endfunction
 
@@ -46,7 +46,7 @@ function! keyword#KeywordRemove (name)
 	let l:index = index (b:keyword_list, a:name)
 	if (l:index >= 0)
 		unlet b:keyword_list[l:index]
-		if (@/ == a:name)
+		if (@/ ==# '\V\<' . escape(a:name, '\') . '\>')
 			let @/ = ''
 		endif
 	endif
