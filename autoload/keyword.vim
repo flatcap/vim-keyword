@@ -12,6 +12,10 @@ function! s:clear_syntax()
 endfunction
 
 function! s:highlight()
+	if !exists('g:syntax_on')
+		echohl WarningMsg | echomsg 'keyword.vim: syntax highlighting is not enabled' | echohl None
+		return
+	endif
 	call s:clear_syntax()
 	for l:item in b:keyword_list
 		execute 'syntax keyword ' g:keyword_group l:item ' contained containedin=ALL'
