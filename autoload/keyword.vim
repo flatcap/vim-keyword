@@ -1,7 +1,7 @@
 " keyword.vim - Temporary keyword highlighting
 " Author:       Rich Russon (flatcap) <rich@flatcap.org>
 " Website:      https://flatcap.org
-" Copyright:    2014-2015 Richard Russon
+" Copyright:    2014-2026 Richard Russon
 
 " Set default values
 let g:keyword_group     = get (g:, 'keyword_group',     'KeywordHighlight')

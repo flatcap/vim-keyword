@@ -54,7 +54,7 @@ call keyword#KeywordList()
 
 ## License
 
-Copyright &copy; Richard Russon (flatcap).
+Copyright &copy; 2014-2026 Richard Russon (flatcap).
 Distributed under the GPLv3 <http://fsf.org/>
 
 ## See also
