@@ -10,5 +10,6 @@ if (exists ('g:loaded_keyword') || &cp || (v:version < 700))
 endif
 let g:loaded_keyword = 1
 
-nnoremap <silent> <script> <Plug>KeywordToggle :call keyword#KeywordToggle (expand ('<cword>'))<CR>
+nnoremap <silent> <Plug>(keyword-toggle) :<C-u>call keyword#KeywordToggle (expand ('<cword>'))<CR>
+nmap <Plug>KeywordToggle <Plug>(keyword-toggle)
 
