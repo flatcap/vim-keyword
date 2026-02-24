@@ -3,7 +3,7 @@
 " Website:      https://flatcap.org
 " Copyright:    2014-2026 Richard Russon
 " License:      GPLv3 <http://fsf.org/>
-" Version:      1.1
+" Version:      1.2
 
 if (exists ('g:loaded_keyword') || &cp || (v:version < 700))
 	finish

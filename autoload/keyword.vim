@@ -2,16 +2,18 @@
 " Author:       Rich Russon (flatcap) <rich@flatcap.org>
 " Website:      https://flatcap.org
 " Copyright:    2014-2026 Richard Russon
+" License:      GPLv3 <http://fsf.org/>
+" Version:      1.2
 
 " Set default values
 let g:keyword_group     = get (g:, 'keyword_group',     'KeywordHighlight')
 let g:keyword_highlight = get (g:, 'keyword_highlight', 'ctermbg=blue')
 
-function! s:clear_syntax()
+function! s:clear_syntax() abort
 	silent! execute 'syntax clear ' g:keyword_group
 endfunction
 
-function! s:highlight()
+function! s:highlight() abort
 	if !exists('g:syntax_on')
 		echohl WarningMsg | echomsg 'keyword.vim: syntax highlighting is not enabled' | echohl None
 		return
@@ -23,23 +25,23 @@ function! s:highlight()
 	execute 'highlight default ' g:keyword_group g:keyword_highlight
 endfunction
 
-function! s:is_valid(name)
+function! s:is_valid(name) abort
 	return type(a:name) == v:t_string && a:name =~# '^\k\+$'
 endfunction
 
-function! s:prep()
+function! s:prep() abort
 	if (!exists ('b:keyword_list'))
 		let b:keyword_list = []
 	endif
 endfunction
 
 
-function! keyword#KeywordClear()
+function! keyword#KeywordClear() abort
 	call s:clear_syntax()
 	let b:keyword_list = []
 endfunction
 
-function! keyword#KeywordAdd (name)
+function! keyword#KeywordAdd (name) abort
 	if (!s:is_valid(a:name))
 		echoerr '"' . a:name . '" is not a valid keyword'
 		return
@@ -53,7 +55,7 @@ function! keyword#KeywordAdd (name)
 	call s:highlight()
 endfunction
 
-function! keyword#KeywordRemove (name)
+function! keyword#KeywordRemove (name) abort
 	if (!s:is_valid(a:name))
 		echoerr '"' . a:name . '" is not a valid keyword'
 		return
@@ -69,7 +71,7 @@ function! keyword#KeywordRemove (name)
 	call s:highlight()
 endfunction
 
-function! keyword#KeywordToggle (name)
+function! keyword#KeywordToggle (name) abort
 	if (!s:is_valid(a:name))
 		echoerr '"' . a:name . '" is not a valid keyword'
 		return
@@ -84,7 +86,7 @@ function! keyword#KeywordToggle (name)
 	endif
 endfunction
 
-function! keyword#KeywordList()
+function! keyword#KeywordList() abort
 	call s:prep()
 	echo 'Keywords:' sort(b:keyword_list)
 endfunction
