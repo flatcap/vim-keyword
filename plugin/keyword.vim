@@ -5,15 +5,14 @@
 " License:      GPLv3 <http://fsf.org/>
 " Version:      1.2
 
-if (exists ('g:loaded_keyword') || &cp || (v:version < 700))
+if exists('g:loaded_keyword') || &cp || v:version < 700
 	finish
 endif
 let g:loaded_keyword = 1
 
-nnoremap <silent> <Plug>(keyword-toggle) :<C-u>call keyword#KeywordToggle (expand ('<cword>'))<CR>
+nnoremap <silent> <Plug>(keyword-toggle) :<C-u>call keyword#KeywordToggle(expand('<cword>'))<CR>
 nmap <Plug>KeywordToggle <Plug>(keyword-toggle)
 
-command! KeywordToggle call keyword#KeywordToggle (expand ('<cword>'))
-command! KeywordClear  call keyword#KeywordClear ()
-command! KeywordList   call keyword#KeywordList ()
-
+command! KeywordToggle call keyword#KeywordToggle(expand('<cword>'))
+command! KeywordClear  call keyword#KeywordClear()
+command! KeywordList   call keyword#KeywordList()
